@@ -27,3 +27,37 @@ function getHumanChoice() {
 
     return userChoice;
 }
+
+// Initialize variables to keep track of the computer's and humans's win count
+let humanScore = 0;
+let computerScore = 0;
+
+// Play a round of rock, paper, scissors between the computer and the human
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice == computerChoice) {
+        console.log("It's a tie!");
+    } else if (humanChoice == "rock" && computerChoice == "scissors") {
+        humanScore++;
+        console.log("You win! Rock beats scissors");
+    } else if (humanChoice == "rock" && computerChoice == "paper") {
+        computerScore++;
+        console.log("You lose! Paper beats rock");
+    } else if (humanChoice == "paper" && computerChoice == "rock") {
+        humanScore++;
+        console.log("You win! Paper beats rock");
+    } else if (humanChoice == "paper" && computerChoice == "scissors") {
+        computerScore++;
+        console.log("You lose! Scissors beat paper");
+    } else if (humanChoice == "scissors" && computerChoice == "paper") {
+        humanScore++;
+        console.log("You win! Scissors beat paper");
+    } else if (humanChoice == "scissors" && computerChoice == "rock") {
+        computerScore++;
+        console.log("You lose! Rock beats scissors");
+    }
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);

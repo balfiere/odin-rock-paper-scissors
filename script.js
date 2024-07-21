@@ -18,9 +18,9 @@ function playGame() {
 
     // Initialize variables to keep track of the computer's and humans's win count
     let humanScore = 0;
-    let humanScoreDisplay = document.getElementById("humanScore");
+    let humanScoreDisplay = document.getElementById("humanScoreDisplay");
     let computerScore = 0;
-    let computerScoreDisplay = document.getElementById("computerScore");
+    let computerScoreDisplay = document.getElementById("computerScoreDisplay");
     let winnerDisplay = document.getElementById("winner");
 
     // Play a round of rock, paper, scissors between the computer and the human
@@ -60,20 +60,30 @@ function playGame() {
         }
     }
     
-    const buttons = document.querySelectorAll("button");
-    
-    buttons.forEach((button) => {
-        button.addEventListener("click", playRound);
-    });
+    let buttons = document.querySelector('#buttons');
 
-    // Print the winner of the game in the console
-    if (humanScore > computerScore) {
-        console.log("You won " + humanScore + " to " + computerScore + " 🥳");
-    } else if (computerScore > humanScore) {
-        console.log("You lost " + computerScore + " to " + humanScore + " 😢");
-    } else {
-        console.log("It's a tie 🤝");
-    }
+    buttons.addEventListener('click', function(event) {
+        playRound(event);
+        if (humanScore === 5 || computerScore === 5) {
+
+            buttons.querySelectorAll('button').forEach(button => {
+                button.disabled = true;
+            });
+
+            let finalWinner = document.createElement('p');
+            finalWinner.innerHTML = "Game over! ";
+
+            if (humanScore > computerScore) {
+                finalWinner.innerHTML += ("You won " + humanScore + " to " + computerScore + " 🥳");
+            } else if (computerScore > humanScore) {
+                finalWinner.innerHTML += ("You lost " + computerScore + " to " + humanScore + " 😢");
+            } else {
+                finalWinner.innerHTML += ("It's a tie 🤝");
+            }
+
+            winnerDisplay.appendChild(finalWinner);
+        }
+    });
 }
 
 playGame();

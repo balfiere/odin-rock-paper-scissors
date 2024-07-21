@@ -15,7 +15,56 @@ function getComputerChoice() {
 
 // Play 5 rounds of rock, paper, scissors
 function playGame() {
+
+    // Initialize variables to keep track of the computer's and humans's win count
+    let humanScore = 0;
+    let humanScoreDisplay = document.getElementById("humanScore");
+    let computerScore = 0;
+    let computerScoreDisplay = document.getElementById("computerScore");
+    let winnerDisplay = document.getElementById("winner");
+
+    // Play a round of rock, paper, scissors between the computer and the human
+    function playRound(event) {
     
+        // Get the computer's and human's choice of rock, paper, or scissors
+        const humanSelection = event.target.id;
+        const computerSelection = getComputerChoice(); 
+    
+        // Compare the computer's and human's choices to see who won; whoever won, add 1 to their score
+        if (humanSelection == computerSelection) {
+            winnerDisplay.innerHTML = "It's a tie!";
+        } else if (humanSelection == "rock" && computerSelection == "scissors") {
+            humanScore++;
+            humanScoreDisplay.innerHTML = humanScore;
+            winnerDisplay.innerHTML = "You win! Rock beats scissors";
+        } else if (humanSelection == "rock" && computerSelection == "paper") {
+            computerScore++;
+            computerScoreDisplay.innerHTML = computerScore;
+            winnerDisplay.innerHTML = "You lose! Paper beats rock";
+        } else if (humanSelection == "paper" && computerSelection == "rock") {
+            humanScore++;
+            humanScoreDisplay.innerHTML = humanScore;
+            winnerDisplay.innerHTML = "You win! Paper beats rock";
+        } else if (humanSelection == "paper" && computerSelection == "scissors") {
+            computerScore++;
+            computerScoreDisplay.innerHTML = computerScore;
+            winnerDisplay.innerHTML = "You lose! Scissors beat paper";
+        } else if (humanSelection == "scissors" && computerSelection == "paper") {
+            humanScore++;
+            humanScoreDisplay.innerHTML = humanScore;
+            winnerDisplay.innerHTML = "You win! Scissors beat paper";
+        } else if (humanSelection == "scissors" && computerSelection == "rock") {
+            computerScore++;
+            computerScoreDisplay.innerHTML = computerScore;
+            winnerDisplay.innerHTML = "You lose! Rock beats scissors";
+        }
+    }
+    
+    const buttons = document.querySelectorAll("button");
+    
+    buttons.forEach((button) => {
+        button.addEventListener("click", playRound);
+    });
 
     // Print the winner of the game in the console
     if (humanScore > computerScore) {
@@ -27,43 +76,4 @@ function playGame() {
     }
 }
 
-// Play a round of rock, paper, scissors between the computer and the human
-function playRound(event) {
-
-    // Get the computer's and human's choice of rock, paper, or scissors
-    const humanSelection = event.target.id;
-    const computerSelection = getComputerChoice();
-
-    // Compare the computer's and human's choices to see who won; whoever won, add 1 to their score
-    if (humanSelection == computerSelection) {
-        console.log("It's a tie!");
-    } else if (humanSelection == "rock" && computerSelection == "scissors") {
-        humanScore++;
-        console.log("You win! Rock beats scissors");
-    } else if (humanSelection == "rock" && computerSelection == "paper") {
-        computerScore++;
-        console.log("You lose! Paper beats rock");
-    } else if (humanSelection == "paper" && computerSelection == "rock") {
-        humanScore++;
-        console.log("You win! Paper beats rock");
-    } else if (humanSelection == "paper" && computerSelection == "scissors") {
-        computerScore++;
-        console.log("You lose! Scissors beat paper");
-    } else if (humanSelection == "scissors" && computerSelection == "paper") {
-        humanScore++;
-        console.log("You win! Scissors beat paper");
-    } else if (humanSelection == "scissors" && computerSelection == "rock") {
-        computerScore++;
-        console.log("You lose! Rock beats scissors");
-    }
-}
-
-// Initialize variables to keep track of the computer's and humans's win count
-let humanScore = 0;
-let computerScore = 0;
-
-const buttons = document.querySelectorAll("button");
-
-buttons.forEach((button) => {
-    button.addEventListener("click", playRound);
-});
+playGame();
